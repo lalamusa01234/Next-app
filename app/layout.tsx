@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import Providers from "../store/Providers";
+import { Poppins } from "next/font/google";
 import "./globals.css";
+import GoogleProvider from "./providers/GoogleProvider";
+import { ToastContainer, toast } from "react-toastify";
+import Common from "./(user)/_components/common";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const fontPoppins = Poppins({
+  variable: "--font-poppins",
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  weight: "400"
 });
 
 export const metadata: Metadata = {
@@ -25,9 +25,22 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${fontPoppins.variable} antialiased`}
       >
-        {children}
+        <Providers>
+          <Common />
+          <GoogleProvider>{children}
+          </GoogleProvider>
+          <ToastContainer
+            position="top-right"
+            autoClose={1500}
+            hideProgressBar={true}
+            pauseOnHover
+            draggable
+            theme="light"
+            newestOnTop
+          />
+        </Providers>
       </body>
     </html>
   );
