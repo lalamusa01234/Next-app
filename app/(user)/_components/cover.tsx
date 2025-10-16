@@ -9,7 +9,7 @@ const Cover = () => {
         {/* Left Content */}
         <div className="flex flex-col justify-center">
           <div className="space-y-3 text-4xl md:text-5xl lg:text-6xl font-bold">
-            <h1>Discoverr</h1>
+            <h1>Discover</h1>
             <h1 className="text-blue-400">Premium Quality</h1>
             <h1>Products</h1>
           </div>
