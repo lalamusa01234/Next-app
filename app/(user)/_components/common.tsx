@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation';
 import { usePathname } from 'next/navigation';
 
 const Common = () => {
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
   const dispatch = useDispatch();
   const navigate = useRouter();
   const [loading, setLoading] = useState(true); // Add loading state
@@ -31,7 +32,7 @@ const Common = () => {
     if(!token) return
 
     axios
-      .get('http://localhost:3000/api/users/me', {
+      .get(`${API_BASE_URL}/api/users/me`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {

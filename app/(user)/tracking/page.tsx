@@ -25,6 +25,8 @@ const TruckIcon: React.FC<TruckIconProps> = ({ className }) => (
   </svg>
 );
 
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
 const statusColors: Record<string, string> = {
   pending: "bg-yellow-100 text-yellow-700",
   processing: "bg-blue-100 text-blue-700",
@@ -119,7 +121,7 @@ const Tracking: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
 
-  const API = "http://localhost:3000/api/orders";
+  const API = `${API_BASE_URL}/api/orders`;
 
   const onSubmit = async (data: FormData) => {
     setError("");
@@ -218,8 +220,8 @@ const Tracking: React.FC = () => {
                       <img
                         src={
                           Array.isArray(item.image) && item.image.length > 0
-                            ? `http://localhost:3000${item.image[0]}`
-                            : `http://localhost:3000${item.image}`
+                            ? `${API_BASE_URL}${item.image[0]}`
+                            : `${API_BASE_URL}${item.image}`
                         }
                         alt={item.name}
                         className="w-16 h-16 object-cover rounded-md border"

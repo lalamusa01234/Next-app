@@ -13,6 +13,7 @@ const Header = () => {
    const router = useRouter();
   const user = useSelector((state : any) => state.user.user);
   const [menuOpen, setMenuOpen] = useState(false);
+    const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
   const dispatchRedux = useDispatch();
 
@@ -60,7 +61,7 @@ const Header = () => {
               className="cursor-pointer rounded-full bg-gray-800 flex justify-center items-center"
             >
               <div className="center font-medium text-xl text-white select-none cursor-pointer">
-                {user ? <img src={user.image ? `http://localhost:3000${user.image}` : "/default-avatar.png"} alt="" className="h-14 w-14 rounded-full object-cover" /> : <div>no user</div>}
+                {user ? <img src={user.image ? `${API_BASE_URL}${user.image}` : "/default-avatar.png"} alt="" className="h-14 w-14 rounded-full object-cover" /> : <div>no user</div>}
 
               </div>
               {menuOpen ? (

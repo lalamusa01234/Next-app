@@ -13,9 +13,10 @@ interface BlogData {
 
 
 const BlogDetail = () => {
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
   const { id } = useParams();
   const [blog, setBlog] = useState<BlogData>();
-  const API = `http://localhost:3000/api/blogs/${id}`;
+  const API = `${API_BASE_URL}/api/blogs/${id}`;
 
   useEffect(() => {
     const fetchBlog = async () => {
@@ -40,7 +41,7 @@ const BlogDetail = () => {
   return (
     <div className="mx-20 px-6 py-16">
       <img
-        src={`http://localhost:3000${blog.image}`}
+        src={`${API_BASE_URL}${blog.image}`}
         alt={blog.title}
         className="w-full h-96 object-cover rounded-2xl mb-8"
       />

@@ -6,8 +6,9 @@ import Link from "next/link";
 
 const CategoriesMain = () => {
   const [Categories, setCategories] = useState([]);
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-  const API = "http://localhost:3000/api/categories";
+  const API = `${API_BASE_URL}/api/categories`;
 
   // Fetch Categories
   const getCategoryData = async () => {
@@ -51,7 +52,7 @@ const CategoriesMain = () => {
                 {item.image ? (
                   <div>
                     <img
-                      src={`http://localhost:3000${item.image}`}
+                      src={`${API_BASE_URL}${item.image}`}
                       alt={item.category}
                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     />
@@ -111,7 +112,7 @@ const CategoriesMain = () => {
                 {/* Image */}
                 {item.image ? (
                   <img
-                    src={`http://localhost:3000${item.image}`}
+                    src={`${API_BASE_URL}${item.image}`}
                     alt={item.category}
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />

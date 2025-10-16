@@ -14,8 +14,9 @@ interface BlogData {
 
 
 const Blog = () => {
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
   const [posts, setPosts] = useState<BlogData[]>([]);
-  const API = "http://localhost:3000/api/blogs";
+  const API = `${API_BASE_URL}/api/blogs`;
 
   useEffect(() => {
     const fetchBlogs = async () => {
@@ -47,7 +48,7 @@ const Blog = () => {
               className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition"
             >
               <img
-                src={`http://localhost:3000${post.image}`}
+                src={`${API_BASE_URL}${post.image}`}
                 alt={post.title}
                 className="w-full h-56 object-cover"
               />

@@ -15,6 +15,7 @@ interface ContactFormInputs {
 }
 
 const Contact: React.FC = () => {
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
   const {
     register,
     handleSubmit,
@@ -24,7 +25,7 @@ const Contact: React.FC = () => {
 
   const onSubmit: SubmitHandler<ContactFormInputs> = async (data) => {
     try {
-      await axios.post("http://localhost:3000/api/contacts", data);
+      await axios.post(`${API_BASE_URL}/api/contacts`, data);
       toast.success("Message sent successfully!");
       reset();
     } catch (error: any) {

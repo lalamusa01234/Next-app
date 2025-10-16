@@ -59,7 +59,7 @@ const OrderDetails = () => {
   const getOrderById = async (id: string) => {
     try {
       const res = await axios.get<Order>(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/orders/${id}`
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/orders/${id}`
       );
       setData(res.data.order);
       setLogs(res.data.logs || []);
@@ -74,7 +74,7 @@ const OrderDetails = () => {
     try {
       setUpdating(true);
       await axios.put(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/orders/${orderId}/status`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/orders/${orderId}/status`,
         { status: selectedStatus }
       );
       setData((prev) => (prev ? { ...prev, status: selectedStatus } : prev));
@@ -156,7 +156,7 @@ const OrderDetails = () => {
                 >
                   <div className="flex items-center gap-4">
                     <img
-                      src={`${process.env.NEXT_PUBLIC_API_URL}${item.image}`}
+                      src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${item.image}`}
                       alt={item.name}
                       className="w-16 h-16 object-cover rounded-md border"
                     />

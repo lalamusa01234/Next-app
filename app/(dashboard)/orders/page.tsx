@@ -50,6 +50,7 @@ interface OrderStats {
 // };
 
 const UserOrders = () => {
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
   const router = useRouter();
   const [orders, setOrders] = useState<Order[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -70,8 +71,8 @@ const UserOrders = () => {
     totalAmount: 0,
   });
 
-  const API = "http://localhost:3000/api/orders/user";
-  const orderStatsAPI = "http://localhost:3000/api/orders/user/stats";
+  const API = `${API_BASE_URL}/api/orders/user`;
+  const orderStatsAPI = `${API_BASE_URL}/api/orders/user/stats`;
 
   // Fetch Orders with Filters and Search
   const fetchOrders = async () => {
@@ -110,7 +111,7 @@ const UserOrders = () => {
     try {
       const token = localStorage.getItem("token");
       const res = await axios.get(
-        "http://localhost:3000/api/orders/user/export",
+        `${API_BASE_URL}/api/orders/user/export`,
         {
           headers: { Authorization: `Bearer ${token}` },
           responseType: "blob", // important for file download
@@ -135,7 +136,7 @@ const UserOrders = () => {
     try {
       const token = localStorage.getItem("token");
       const res = await axios.post(
-        `http://localhost:3000/api/orders/${orderId}/cancel`,
+        `${API_BASE_URL}/api/orders/${orderId}/cancel`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -152,7 +153,7 @@ const UserOrders = () => {
     try {
       const token = localStorage.getItem("token");
       const res = await axios.post(
-        `http://localhost:3000/api/orders/${orderId}/confirm-delivery`,
+        `${API_BASE_URL}/api/orders/${orderId}/confirm-delivery`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -169,7 +170,7 @@ const UserOrders = () => {
     try {
       const token = localStorage.getItem("token");
       const res = await axios.post(
-        `http://localhost:3000/api/orders/${orderId}/return`,
+        `${API_BASE_URL}/api/orders/${orderId}/return`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -214,7 +215,7 @@ const UserOrders = () => {
 
       const token = localStorage.getItem("token");
       await axios.post(
-        `http://localhost:3000/api/review/product/${product.product}`,
+        `${API_BASE_URL}/api/review/product/${product.product}`,
         { rating: newRating, comment },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -470,7 +471,7 @@ const UserOrders = () => {
                   <div className="flex gap-4 items-center">
                     <div>
                       <img
-                        src={`http://localhost:3000${product.image}`}
+                        src={`${API_BASE_URL}${product.image}`}
                         className="h-17 w-17 object-cover bg-white rounded-lg"
                         alt=""
                       />
@@ -505,7 +506,7 @@ const UserOrders = () => {
                     Review: {product.name}
                   </h2>
                   <img
-                    src={`http://localhost:3000${product.image}`}
+                    src={`${API_BASE_URL}${product.image}`}
                     alt={product.name}
                     className="w-20 h-20 object-cover mb-3 rounded"
                   />

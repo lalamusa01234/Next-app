@@ -32,6 +32,7 @@ interface FormData {
 }
 
 const Checkout = () => {
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
   const {
     register,
     handleSubmit,
@@ -68,7 +69,7 @@ const Checkout = () => {
   const createPayment = async (amount: number): Promise<string | undefined> => {
     try {
       const response = await axios.post<{ clientSecret: string }>(
-        "http://localhost:3000/api/orders/create-payment-intent",
+        `${API_BASE_URL}/api/orders/create-payment-intent`,
         { amount: amount * 100 } // Convert to cents for Stripe
       );
       return response.data.clientSecret;
@@ -234,7 +235,7 @@ const Checkout = () => {
       console.log("Sending order data:", orderData);
 
       const res = await axios.post<{ order: { orderNumber: string } }>(
-        "http://localhost:3000/api/orders",
+        `${API_BASE_URL}/api/orders`,
         orderData
       );
 
@@ -737,7 +738,7 @@ const Checkout = () => {
                       <div key={index} className="grid grid-cols-2 p-4 border-b border-gray-200">
                         <div className="relative min-h-20 min-w-20 w-20 h-20">
                           <img
-                            src={`http://localhost:3000${Array.isArray(item.image) ? item.image[0] : item.image}`}
+                            src={`${API_BASE_URL}${Array.isArray(item.image) ? item.image[0] : item.image}`}
                             className="absolute inset-0 h-full w-full object-cover rounded"
                             alt={item.name}
                           />

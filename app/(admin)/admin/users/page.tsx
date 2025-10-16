@@ -9,7 +9,8 @@ import { User } from "./types/User"
 const AddEditUser = dynamic(() => import("./_components/AddEditUser"), { ssr: false })
 
 const UsersData = () => {
-  const API = "http://localhost:3000/api/users"
+    const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+  const API = `${API_BASE_URL}/api/users`
 
   const [showSignUpModel, setShowSignUpModel] = useState<boolean>(false)
   const [selectedUser, setSelectedUser] = useState<User | null>(null)

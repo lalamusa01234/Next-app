@@ -14,8 +14,9 @@ interface Subscriber {
 
 
 const SubscribersTable = () => {
+    const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
   const [subscribers, setSubscribers] = useState<Subscriber[]>([]);
-  const API = "http://localhost:3000/api/newsletter";
+  const API = `${API_BASE_URL}/api/newsletter`;
 
   const getSubscribers = async () => {
     try {

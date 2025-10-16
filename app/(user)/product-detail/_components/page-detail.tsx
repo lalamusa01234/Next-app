@@ -64,6 +64,7 @@ const PageDetail = ({ productId }: PageDetailProps) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const user = useSelector((state: any) => state.user.user);
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
   const [product, setProduct] = useState<Product | null>(null);
   const [catProduct, setCatProduct] = useState<Product[] | null>(null);
@@ -88,10 +89,10 @@ const originalPrice = selectedVariation?.price ?? product?.price ?? 0;
 const discountValue = selectedVariation?.discountValue ?? product?.discountValue ?? 0;
 const discountType = selectedVariation?.discountType ?? product?.discountType ?? "";
 
-  const API = "http://localhost:3000/api/products";
-  const CATEGORY_API = "http://localhost:3000/api/products/category";
-  const WISHLIST_API = "http://localhost:3000/api/wishlist";
-  const REVIEW_API = "http://localhost:3000/api/review";
+  const API = `${API_BASE_URL}/api/products`;
+  const CATEGORY_API = `${API_BASE_URL}/api/products/category`;
+  const WISHLIST_API = `${API_BASE_URL}/api/wishlist`;
+  const REVIEW_API = `${API_BASE_URL}/api/review`;
 
 const id = productId
 
@@ -107,7 +108,7 @@ const id = productId
         setCategoryId(cat._id);
         setCategoryName(cat.category);
       }
-      if (fetched.image?.length) setSelectedImage(`http://localhost:3000${fetched.image[0]}`);
+      if (fetched.image?.length) setSelectedImage(`${API_BASE_URL}${fetched.image[0]}`);
       setSelectedVariationIndex(fetched.variations?.length ? 0 : -1);
     } catch (err) {
       console.error(err);
@@ -276,12 +277,12 @@ const id = productId
                 {product.image?.map((img, index) => (
                   <img
                     key={index}
-                    src={`http://localhost:3000${img}`}
+                    src={`${API_BASE_URL}${img}`}
                     alt={`${product.name} ${index}`}
                     onClick={() =>
-                      setSelectedImage(`http://localhost:3000${img}`)
+                      setSelectedImage(`${API_BASE_URL}${img}`)
                     }
-                    className={`w-20 h-20 object-cover rounded-lg border cursor-pointer transition ${selectedImage === `http://localhost:3000${img}`
+                    className={`w-20 h-20 object-cover rounded-lg border cursor-pointer transition ${selectedImage === `${API_BASE_URL}${img}`
                       ? "border-gray-800"
                       : "border-gray-300"
                       }`}

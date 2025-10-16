@@ -40,6 +40,7 @@ interface Order {
 }
 
 const OrderSuccess: React.FC = () => {
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
   const { id } = useParams<{ id: string }>();
   const [order, setOrder] = useState<Order | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -47,7 +48,7 @@ const OrderSuccess: React.FC = () => {
 
 
  
-  const API = "http://localhost:3000/api/orders";
+  const API = `${API_BASE_URL}/api/orders`;
 
   useEffect(() => {
   const fetchOrder = async () => {
@@ -149,8 +150,8 @@ const OrderSuccess: React.FC = () => {
                   <img
                     src={
                       Array.isArray(item.image)
-                        ? `http://localhost:3000${item.image[0]}`
-                        : `http://localhost:3000${item.image}`
+                        ? `${API_BASE_URL}${item.image[0]}`
+                        : `${API_BASE_URL}${item.image}`
                     }
                     alt={item.name}
                     className="w-16 h-16 object-cover rounded-md border"

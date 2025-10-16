@@ -14,6 +14,7 @@ const AdminSide: React.FC<AdminSideProps> = ({ isExpanded, setIsExpanded }) => {
   const router = useRouter();
   const user = useSelector((state: any) => state.user.user);
   const dispatchRedux = useDispatch();
+    const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -338,7 +339,7 @@ const AdminSide: React.FC<AdminSideProps> = ({ isExpanded, setIsExpanded }) => {
             <img
               src={
                 user.image
-                  ? `http://localhost:3000${user.image}`
+                  ? `${API_BASE_URL}${user.image}`
                   : "/default-avatar.png"
               }
               alt="Profile"

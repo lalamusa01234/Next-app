@@ -11,13 +11,14 @@ interface ProductTableProps {
 }
 
 const ProductTable = ({ products, confirmDelete, currentPage, limit }: ProductTableProps) => {
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
   const renderImage = (imageArr: string[], name: string) => {
     if (!imageArr || imageArr.length === 0) {
       return <span className="text-gray-400 italic">No Image</span>;
     }
     return (
       <img
-        src={`http://localhost:3000${imageArr[0]}`}
+        src={`${API_BASE_URL}${imageArr[0]}`}
         alt={name}
         className="h-13 w-13 object-cover rounded"
       />

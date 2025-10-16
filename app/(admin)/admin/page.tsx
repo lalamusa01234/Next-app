@@ -86,14 +86,15 @@ const [orderStats, setOrderStats] = useState<OrderStats>({
   totalRevenue: 0,
 });
 const [monthlySales, setMonthlySales] = useState<MonthlySales[]>([]);
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 
-  const productsAPI = "http://localhost:3000/api/products";
-  const usersAPI = "http://localhost:3000/api/users";
-  const orderAPI = "http://localhost:3000/api/orders";
-  const topProductsAPI = "http://localhost:3000/api/orders/top-products";
-  const orderStatsAPI = "http://localhost:3000/api/orders/stats";
-  const monthSalesAPI = "http://localhost:3000/api/orders/monthly-sales";
+  const productsAPI = `${API_BASE_URL}/api/products`;
+  const usersAPI = `${API_BASE_URL}/api/users`;
+  const orderAPI = `${API_BASE_URL}/api/orders`;
+  const topProductsAPI = `${API_BASE_URL}/api/orders/top-products`;
+  const orderStatsAPI = `${API_BASE_URL}/api/orders/stats`;
+  const monthSalesAPI = `${API_BASE_URL}/api/orders/monthly-sales`;
 
 
   const getProductsData = async () => {

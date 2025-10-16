@@ -61,9 +61,10 @@ const ProductForm = ({ mode, initialData }: ProductFormProps) => {
           discountValue: 0,
         },
   });
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-  const PRODUCT_API = "http://localhost:3000/api/products";
-  const CATEGORY_API = "http://localhost:3000/api/categories";
+  const PRODUCT_API = `${API_BASE_URL}/api/products`;
+  const CATEGORY_API = `${API_BASE_URL}/api/categories`;
 
   useEffect(() => {
     axios
@@ -223,7 +224,7 @@ const ProductForm = ({ mode, initialData }: ProductFormProps) => {
             {isEditMode && productFromInitial.image?.length > 0 && (
               <div className="mt-3 grid grid-cols-2 md:grid-cols-4 gap-4">
                 {productFromInitial.image.map((img, idx) => (
-                  <img key={idx} src={`http://localhost:3000${img}`} alt={`old-${idx}`} className="w-full h-28 object-cover rounded-lg" />
+                  <img key={idx} src={`${API_BASE_URL}${img}`} alt={`old-${idx}`} className="w-full h-28 object-cover rounded-lg" />
                 ))}
               </div>
             )}

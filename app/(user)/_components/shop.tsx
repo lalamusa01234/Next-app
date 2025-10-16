@@ -8,15 +8,16 @@ import { addData } from "@/features/itemSlice";
 import Link from "next/link";
 
 const Shop = ({ categoryId, limit, hideCategory, excludeId }: any) => {
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
   const user = useSelector((state: any) => state.user.user);
   const [products, setProducts] = useState([]);
   const [wishlist, setWishlist] = useState([]);
   const [category, setCategory] = useState<any>(null);
   const dispatch = useDispatch();
 
-  const PRODUCTS_API = "http://localhost:3000/api/products";
-  const WISHLIST_API = "http://localhost:3000/api/wishlist";
-  const CATEGORY_API = "http://localhost:3000/api/categories";
+  const PRODUCTS_API = `${API_BASE_URL}/api/products`;
+  const WISHLIST_API = `${API_BASE_URL}/api/wishlist`;
+  const CATEGORY_API = `${API_BASE_URL}/api/categories`;
   const DEFAULT_LIMIT = 8;
 
   // const getImageUrl = (img) => (img.startsWith("http") ? img : `http://localhost:3000${img}`);
@@ -190,7 +191,7 @@ const Shop = ({ categoryId, limit, hideCategory, excludeId }: any) => {
             <Link href={`/product-detail/${item._id}`} className="block">
               <div className="w-full h-64 bg-gray-50 overflow-hidden">
                 <img
-                  src={`http://localhost:3000${(Array.isArray(item.image) && item.image.length > 0) ? item.image[0] : "/placeholder.jpg"}`}
+                  src={`${API_BASE_URL}${(Array.isArray(item.image) && item.image.length > 0) ? item.image[0] : "/placeholder.jpg"}`}
                   //  src={getImageUrl((Array.isArray(item.image) ? item.image[0] : item.image) ?? "/placeholder.jpg")}
                   alt={item.name}
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"

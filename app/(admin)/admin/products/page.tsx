@@ -15,8 +15,9 @@ const ProductsPage = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(1);
   const [limit] = useState<number>(5);
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-  const API = "http://localhost:3000/api/products";
+  const API = `${API_BASE_URL}/api/products`;
 
   const getProductsData = async (page = 1) => {
     try {

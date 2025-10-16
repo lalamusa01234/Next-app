@@ -87,7 +87,9 @@ const OrderTable: React.FC = () => {
     setSortConfig({ key, direction });
   };
 
-  const API = "http://localhost:3000/api/orders";
+    const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
+  const API = `${API_BASE_URL}/api/orders`;
 
   const getOrdersData = async (page = 1) => {
     try {

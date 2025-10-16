@@ -29,11 +29,12 @@ const Wishlist = () => {
   const [wishlist, setWishlist] = useState<WishlistData | null>(null);
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
   const deleteWl = async (id: string) => {
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:3000/api/wishlist/${id}`, {
+      await axios.delete(`${API_BASE_URL}/api/wishlist/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setWishlist((prev: any) => ({
@@ -50,7 +51,7 @@ const Wishlist = () => {
   const fetchWishlist = async () => {
     try {
       const token = localStorage.getItem("token");
-      const { data } = await axios.get("http://localhost:3000/api/wishlist", {
+      const { data } = await axios.get(`${API_BASE_URL}/api/wishlist`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (!data || !data.products) {
@@ -60,7 +61,7 @@ const Wishlist = () => {
         const productIds = data.products.map((item: any) => item.product?._id).filter(Boolean);
         if (productIds.length > 0) {
           // Fetch full product details from /api/products
-          const productsResponse = await axios.get(`http://localhost:3000/api/products`, {
+          const productsResponse = await axios.get(`${API_BASE_URL}/api/products`, {
             params: { ids: productIds.join(',') }, // Assuming /api/products supports filtering by IDs
           });
           const productsWithRatings = productsResponse.data.products || [];
@@ -138,7 +139,7 @@ const Wishlist = () => {
               )}
               <Link href={`/product-detail/${product._id}`}><div className="w-full h-64 bg-gray-50 overflow-hidden">
                 <img
-                  src={`http://localhost:3000${product.image[0]}`}
+                  src={`${API_BASE_URL}${product.image[0]}`}
                   alt={product.name}
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                 />

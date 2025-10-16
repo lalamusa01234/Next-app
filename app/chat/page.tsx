@@ -7,7 +7,7 @@ interface DecodedToken {
   id: string;
 }
 
-const socket: Socket = io("http://localhost:3000", {
+const socket: Socket = io(`${process.env.NEXT_PUBLIC_API_BASE_URL}`, {
   transports: ["websocket"],
 });
 

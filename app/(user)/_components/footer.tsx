@@ -8,6 +8,7 @@ import axios from "axios";
 import Link from "next/link";
 
 const Footer = () => {
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
   const [Categories, setCategories] = useState([]);
   const itemData = useSelector((state: any) => state.items);
   const [email, setEmail] = useState("");
@@ -21,7 +22,7 @@ const Footer = () => {
     }
 
     try {
-      await axios.post("http://localhost:3000/api/newsletter", { email });
+      await axios.post(`${API_BASE_URL}/api/newsletter`, { email });
       toast.success("Subscribed successfully!");
       setEmail(""); // clear input
     } catch (error: any) {
@@ -29,7 +30,7 @@ const Footer = () => {
     }
   };
 
-  const API = "http://localhost:3000/api/categories";
+  const API = `${API_BASE_URL}/api/categories`;
 
   // Fetch Categories
   const getCategoryData = async () => {

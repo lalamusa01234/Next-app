@@ -9,14 +9,15 @@ import Link from "next/link";
 
 
 const ShopMain = () => {
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
   const user = useSelector((state: any) => state.user.user);
   const [products, setProducts] = useState([]);
   const [wishlist, setWishlist] = useState([]);
   const [visibleCount, setVisibleCount] = useState(6);
   const dispatch = useDispatch();
 
-  const PRODUCTS_API = "http://localhost:3000/api/products";
-  const WISHLIST_API = "http://localhost:3000/api/wishlist";
+  const PRODUCTS_API = `${API_BASE_URL}/api/products`;
+  const WISHLIST_API = `${API_BASE_URL}/api/wishlist`;
 
   // Fetch products
   const getProducts = async () => {
@@ -171,7 +172,7 @@ const ShopMain = () => {
                   </div>
                 )}
                 <img
-                  src={`http://localhost:3000${
+                  src={`${API_BASE_URL}${
                     Array.isArray(item.image) && item.image.length > 0
                       ? item.image[0]
                       : "/placeholder.jpg"

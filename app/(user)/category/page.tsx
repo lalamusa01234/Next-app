@@ -10,10 +10,11 @@ interface ICategory {
 }
 
 const Category = () => {
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
   const [Categories, setCategories] = useState<ICategory[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
-  const API = "http://localhost:3000/api/categories";
+  const API = `${API_BASE_URL}/api/categories`;
 
   // Fetch Categories
   const getCategoryData = async () => {
@@ -57,7 +58,7 @@ const Category = () => {
                 {/* Image or placeholder */}
                 {hasImage ? (
                   <img
-                    src={`http://localhost:3000${item.image}`}
+                    src={`${API_BASE_URL}${item.image}`}
                     alt={item.category}
                     className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />

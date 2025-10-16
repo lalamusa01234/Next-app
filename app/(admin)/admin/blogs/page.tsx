@@ -7,7 +7,8 @@ import AddBlog from "./_components/AddBlog";
 import { Blog } from "./types/blog";
 
 const BlogIndex: React.FC = () => {
-  const API = "http://localhost:3000/api/blogs";
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+  const API = `${API_BASE_URL}/api/blogs`;
 
   const [showAddModal, setShowAddModal] = useState<boolean>(false);
   const [selectedBlog, setSelectedBlog] = useState<Blog | null>(null);

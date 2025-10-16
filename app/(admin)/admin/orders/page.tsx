@@ -33,7 +33,8 @@ const Ordersdata: React.FC = () => {
      const router = useRouter();
   // const navigate = useNavigate();
   const [data, setData] = useState<Order[]>([]);
-const orderStatsAPI = "http://localhost:3000/api/orders/stats";
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+const orderStatsAPI = `${API_BASE_URL}/api/orders/stats`;
     // Status counts
   const [orderStats, setOrderStats] = useState<OrderStats>({
     total: 0,
@@ -45,7 +46,7 @@ const orderStatsAPI = "http://localhost:3000/api/orders/stats";
     totalRevenue: 0,
   });
 
-  const API = "http://localhost:3000/api/orders";
+  const API = `${API_BASE_URL}/api/orders`;
 
   // Fetch orders
   const getOrdersData = async () => {

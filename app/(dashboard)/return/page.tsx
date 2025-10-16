@@ -20,13 +20,14 @@ interface Order {
 }
 
 const ReturnOrdersPage = () => {
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
   const [returns, setReturns] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
 
   const fetchReturns = async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.get("http://localhost:3000/api/orders/user/returns", {
+      const res = await axios.get(`${API_BASE_URL}/api/orders/user/returns`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setReturns(res.data);
@@ -94,7 +95,7 @@ const ReturnOrdersPage = () => {
                 >
                   <div className="flex items-center gap-4">
                     <img
-                      src={`http://localhost:3000${product.image}`}
+                      src={`${API_BASE_URL}${product.image}`}
                       alt={product.name}
                       className="w-16 h-16 rounded-lg object-cover bg-white"
                     />

@@ -12,8 +12,9 @@ interface BlogTableProps {
 const BlogTable: React.FC<BlogTableProps> = ({ blogs, onEdit, onRefresh }) => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [deleteId, setDeleteId] = useState<string | null>(null);
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-  const API = "http://localhost:3000/api/blogs";
+  const API = `${API_BASE_URL}/api/blogs`;
 
   const openDeleteModal = (id: string) => {
     setDeleteId(id);
@@ -60,7 +61,7 @@ const BlogTable: React.FC<BlogTableProps> = ({ blogs, onEdit, onRefresh }) => {
                 <td className="text-center px-2">{index + 1}</td>
                 <td className="p-4">
                   <img
-                    src={`http://localhost:3000${b.image}`}
+                    src={`${API_BASE_URL}${b.image}`}
                     alt={b.title}
                     className="h-13 w-13 object-cover rounded"
                   />

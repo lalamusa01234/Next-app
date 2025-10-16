@@ -34,6 +34,7 @@ interface Log {
 }
 
 const OrderDetailsPage = () => {
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
   const { id } = useParams();
   const router = useRouter();
   const [order, setOrder] = useState<Order | null>(null);
@@ -43,7 +44,7 @@ const OrderDetailsPage = () => {
   const fetchOrderDetails = async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.get(`http://localhost:3000/api/orders/${id}`, {
+      const res = await axios.get(`${API_BASE_URL}/api/orders/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setOrder(res.data.order);
@@ -127,7 +128,7 @@ const OrderDetailsPage = () => {
           >
             <div className="flex items-center gap-4">
               <img
-                src={`http://localhost:3000${product.image}`}
+                src={`${API_BASE_URL}${product.image}`}
                 alt={product.name}
                 className="h-16 w-16 object-cover rounded-lg"
               />

@@ -19,7 +19,9 @@ const MessagesTable: React.FC = () => {
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
   const [deleteId, setDeleteId] = useState<string | null>(null);
 
-  const API = "http://localhost:3000/api/contacts";
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
+  const API = `${API_BASE_URL}/api/contacts`;
 
   // Fetch messages
   const getMessages = async () => {

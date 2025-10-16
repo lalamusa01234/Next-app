@@ -34,6 +34,7 @@ interface User {
 }
 
 const Login: React.FC = () => {
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
   const dispatch = useDispatch();
   // const navigate = useNavigate();
   const router = useRouter();
@@ -55,7 +56,7 @@ const Login: React.FC = () => {
   const handleGoogleLogin = async (credentialResponse: CredentialResponse) => {
     try {
       const res = await axios.post<{ token: string; user: User }>(
-        "http://localhost:3000/api/users/google-login",
+        `${API_BASE_URL}/api/users/google-login`,
         { token: credentialResponse.credential }
       );
 
@@ -79,7 +80,7 @@ const Login: React.FC = () => {
     if (response.authResponse) {
       try {
         const res = await axios.post<{ token: string; user: User }>(
-          "http://localhost:3000/api/users/facebook-login",
+          `${API_BASE_URL}/api/users/facebook-login`,
           {
             accessToken: response.authResponse.accessToken,
             userID: response.authResponse.userID,
@@ -133,7 +134,7 @@ const Login: React.FC = () => {
   const handleLoginSubmit: SubmitHandler<LoginFormInputs> = async (data) => {
   try {
     const res = await axios.post<{ token: string; user: User }>(
-      "http://localhost:3000/api/users/login",
+      `${API_BASE_URL}/api/users/login`,
       data
     );
 
@@ -142,7 +143,7 @@ const Login: React.FC = () => {
     dispatch(setUser(user)); // Set initial user data from login response
 
     // Fetch full user profile to ensure latest data
-    const profileRes = await axios.get("http://localhost:3000/api/users/me", {
+    const profileRes = await axios.get(`${API_BASE_URL}/api/users/me`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     dispatch(setUser(profileRes.data)); // Update Redux store with full profile

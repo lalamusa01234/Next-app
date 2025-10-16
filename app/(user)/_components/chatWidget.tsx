@@ -17,11 +17,12 @@ interface ChatMessage {
 }
 
 // ✅ Initialize socket globally (persistent)
-const socket: Socket = io("http://localhost:3000", {
+const socket: Socket = io(`${process.env.NEXT_PUBLIC_API_BASE_URL}`, {
   transports: ["websocket"],
 });
 
 export default function ChatWidget() {
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
   const [isOpen, setIsOpen] = useState(false);
   const [userId, setUserId] = useState<string | null>(null);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -45,7 +46,7 @@ export default function ChatWidget() {
         socket.emit("join", decoded.id);
 
         // 🧩 Fetch chat history from backend
-        fetch(`http://localhost:3000/api/chats/${decoded.id}`)
+        fetch(`${API_BASE_URL}/api/chats/${decoded.id}`)
           .then((res) => res.json())
           .then((data) => {
             console.log("📜 Chat history:", data);
@@ -161,7 +162,7 @@ return (
               </div>
               <div>
                 <h2 className="font-semibold text-sm">Support Assistant</h2>
-                <p className="text-xs text-green-500">
+                <p className="text-xs">
                   {socket.connected
                     ? "Online • Typically replies instantly"
                     : "Offline"}

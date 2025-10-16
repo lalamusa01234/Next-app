@@ -17,6 +17,7 @@ interface SignupFormInputs {
 }
 
 const Auth: React.FC = () => {
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
   const initialSignUpData: SignupFormInputs = {
     fname: "",
     lname: "",
@@ -49,7 +50,7 @@ const Auth: React.FC = () => {
   // Submit signup form
   const handleSignupSubmit: SubmitHandler<SignupFormInputs> = async (data) => {
     try {
-      const res = await axios.post("http://localhost:3000/api/users", data);
+      const res = await axios.post(`${API_BASE_URL}/api/users`, data);
       console.log("Signup success:", res.data);
 
       toast.success("Signup successful!", {

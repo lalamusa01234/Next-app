@@ -46,6 +46,7 @@ interface RootState {
 }
 
 const ShopPage: React.FC = () => {
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
   const user = useSelector((state: RootState) => state.user.user);
   const [products, setProducts] = useState<Product[]>([]);
   const [wishlist, setWishlist] = useState<WishlistItem[]>([]);
@@ -63,9 +64,9 @@ const ShopPage: React.FC = () => {
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const dispatch = useDispatch();
 
-  const PRODUCTS_API = "http://localhost:3000/api/products";
-  const WISHLIST_API = "http://localhost:3000/api/wishlist";
-  const CATEGORIES_API = "http://localhost:3000/api/categories";
+  const PRODUCTS_API = `${API_BASE_URL}/api/products`;
+  const WISHLIST_API = `${API_BASE_URL}/api/wishlist`;
+  const CATEGORIES_API = `${API_BASE_URL}/api/categories`;
 
   // --------------------
   // Debounce Hook (inline)
@@ -527,7 +528,7 @@ const ShopPage: React.FC = () => {
                             <Link href={`/product-detail/${item._id}`}>
                               <div className="aspect-[4/3] w-full">
                                 <img
-                                  src={`http://localhost:3000${
+                                  src={`${API_BASE_URL}${
                                     Array.isArray(item.image) &&
                                     item.image.length > 0
                                       ? item.image[0]

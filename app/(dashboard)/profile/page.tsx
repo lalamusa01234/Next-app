@@ -30,6 +30,7 @@ interface ProfileFormInputs {
 }
 
 const Profile = () => {
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
   const [userId, setUserId] = useState<string | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
@@ -45,7 +46,7 @@ const Profile = () => {
     formState: { errors },
   } = useForm<ProfileFormInputs>();
 
-  const API = "http://localhost:3000/api/users";
+  const API = `${API_BASE_URL}/api/users`;
 
   // ✅ Load token safely on client
   useEffect(() => {
@@ -71,7 +72,7 @@ const Profile = () => {
       });
       reset(res.data);
       if (res.data.image) {
-        setImagePreview(`http://localhost:3000${res.data.image}`);
+        setImagePreview(`${API_BASE_URL}${res.data.image}`);
       }
     } catch (err) {
       console.error(err);

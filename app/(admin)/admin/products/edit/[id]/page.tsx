@@ -9,8 +9,9 @@ const EditProductPage = () => {
   const params = useParams();
   const id = params.id as string;
   const [product, setProduct] = useState<Product | null>(null);
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-  const API = "http://localhost:3000/api/products";
+  const API = `${API_BASE_URL}/api/products`;
 
   useEffect(() => {
     const fetchProduct = async () => {

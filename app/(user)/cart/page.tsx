@@ -28,6 +28,7 @@ interface ItemState {
 }
 
 const Cart: React.FC = () => {
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
   const dispatch = useDispatch();
   const itemData = useSelector((state: { items: ItemState }) => state.items);
 
@@ -76,7 +77,7 @@ const Cart: React.FC = () => {
                   {/* Image */}
                   <div className="relative h-20 w-20">
                     <img
-                      src={`http://localhost:3000${
+                      src={`${API_BASE_URL}${
                         Array.isArray(item.image) ? item.image[0] : item.image || "/placeholder.jpg"
                       }`}
                       alt={item.name}

@@ -37,7 +37,7 @@ interface OrderStats {
 
 const Dashboard = () => {
 
-  
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
   const user = useSelector((state : any) => state.user.user);
     const [orders, setOrders] = useState<Order[]>([]);
      const [orderStats, setOrderStats] = useState<OrderStats>({
@@ -56,8 +56,8 @@ const Dashboard = () => {
   (orderStats.return_approved || 0) +
   (orderStats.return_rejected || 0);
     
-      const API = "http://localhost:3000/api/orders/user";
-      const orderStatsAPI = "http://localhost:3000/api/orders/user/stats";
+      const API = `${API_BASE_URL}/api/orders/user`;
+      const orderStatsAPI = `${API_BASE_URL}/api/orders/user/stats`;
 
        // Fetch Orders
   const fetchOrders = async () => {

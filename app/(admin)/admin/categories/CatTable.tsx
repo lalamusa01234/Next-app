@@ -22,6 +22,9 @@ const CatTable: React.FC<CatTableProps> = ({
   currentPage,
   limit,
 }) => {
+
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
   return (
     <table className="bg-white rounded-2xl rounded-b-none mt-7 w-full">
       <thead>
@@ -48,7 +51,7 @@ const CatTable: React.FC<CatTableProps> = ({
               </td>
               <td className="p-4">
                 <img
-                  src={`http://localhost:3000${category.image}`}
+                  src={`${API_BASE_URL}${category.image}`}
                   alt={category.category}
                   className="h-13 w-13 object-cover"
                 />

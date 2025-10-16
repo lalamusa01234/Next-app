@@ -19,6 +19,7 @@ import Link from "next/link";
 const element = <FontAwesomeIcon icon={faEnvelope} />;
 
 const NavBar = () => {
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
   const user = useSelector((state : any) => state.user.user);
   const items = useSelector((state: any) => state.items.list);
   const dispatchRedux = useDispatch();
@@ -106,7 +107,7 @@ const NavBar = () => {
                       <div className="flex">
                         <div className="relative min-h-25 w-25 min-w-25 mx-2 ring-1 ring-gray-100">
                           <img
-                            src={`http://localhost:3000${
+                            src={`${API_BASE_URL}${
                               Array.isArray(item.image)
                                 ? item.image[0]
                                 : item.image || "/placeholder.jpg"
