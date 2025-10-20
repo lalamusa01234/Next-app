@@ -11,6 +11,7 @@ import Link from "next/link";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { getFromStorage } from "@/lib/storage";
 import { setToStorage } from "@/lib/storage";
+import { useCartSync } from "@/hooks/useCartSync";
 
 interface FormData {
   fname: string;
@@ -34,6 +35,7 @@ interface FormData {
 }
 
 const Checkout = () => {
+  useCartSync();
   const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
   const {
     register,

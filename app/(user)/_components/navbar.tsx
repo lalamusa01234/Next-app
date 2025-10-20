@@ -15,10 +15,13 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { ToastContainer, toast } from "react-toastify";
 import UserDropdown from "./dropdown";
 import Link from "next/link";
+import { useCartSync } from "@/hooks/useCartSync";
+
 
 const element = <FontAwesomeIcon icon={faEnvelope} />;
 
 const NavBar = () => {
+  useCartSync();
   const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
   const user = useSelector((state : any) => state.user.user);
   const items = useSelector((state: any) => state.items.list);
