@@ -357,23 +357,21 @@ const NavBar = () => {
                 </div>
               </div>
             </Link>
-          </div>
 
-          {user ?(
+             {user ?(
             <div>
               <UserDropdown />
             </div>
           ) : (
             <Link href="/auth">
-              <div className="uppercase hidden lg:block bg-blue-500 z-20 rounded-full hover:shadow-sm hover:shadow-blue-400 transition-shadow duration-300 px-4 py-2 text-white font-semibold text-xs">
+              <div className="uppercase hidden ml-5 lg:block bg-blue-500 z-20 rounded-full hover:shadow-sm hover:shadow-blue-400 transition-shadow duration-300 px-4 py-2 text-white font-semibold text-xs">
                 Login/Register
               </div>
             </Link>
           )}
-
-          <svg
+            <svg
             onClick={() => setMenuOpen(!menuOpen)}
-            className="z-9 w-5 h-7 cursor-pointer transition-all duration-1000 ease-in-out ham md:hidden"
+            className="z-9 w-5 h-7 ml-5 cursor-pointer transition-all duration-1000 ease-in-out ham md:hidden"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -387,6 +385,11 @@ const NavBar = () => {
               d="M1 1h15M1 7h15M1 13h15"
             />
           </svg>
+          </div>
+
+         
+
+          
         </div>
       </nav>
       {menuOpen && (
