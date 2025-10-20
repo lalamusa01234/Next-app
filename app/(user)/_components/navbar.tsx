@@ -15,10 +15,13 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { ToastContainer, toast } from "react-toastify";
 import UserDropdown from "./dropdown";
 import Link from "next/link";
+import { useCartSync } from "@/hooks/useCartSync";
+
 
 const element = <FontAwesomeIcon icon={faEnvelope} />;
 
 const NavBar = () => {
+  useCartSync();
   const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
   const user = useSelector((state : any) => state.user.user);
   const items = useSelector((state: any) => state.items.list);
@@ -358,20 +361,20 @@ const NavBar = () => {
               </div>
             </Link>
 
-            {user ?(
+             {user ?(
             <div>
               <UserDropdown />
             </div>
           ) : (
             <Link href="/auth">
-              <div className="uppercase hidden ml-8 lg:block bg-blue-500 z-20 rounded-full hover:shadow-sm hover:shadow-blue-400 transition-shadow duration-300 px-4 py-2 text-white font-semibold text-xs">
+              <div className="uppercase hidden ml-5 lg:block bg-blue-500 z-20 rounded-full hover:shadow-sm hover:shadow-blue-400 transition-shadow duration-300 px-4 py-2 text-white font-semibold text-xs">
                 Login/Register
               </div>
             </Link>
           )}
-                 <svg
+            <svg
             onClick={() => setMenuOpen(!menuOpen)}
-            className="z-9 w-5 h-7 cursor-pointer ml-5 transition-all duration-1000 ease-in-out ham md:hidden"
+            className="z-9 w-5 h-7 ml-5 cursor-pointer transition-all duration-1000 ease-in-out ham md:hidden"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -387,9 +390,9 @@ const NavBar = () => {
           </svg>
           </div>
 
-          
+         
 
-     
+          
         </div>
       </nav>
       {menuOpen && (

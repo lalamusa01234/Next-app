@@ -1,32 +1,16 @@
+"use client";
 import { createSlice } from "@reduxjs/toolkit";
+import { getFromStorage, setToStorage } from "@/lib/storage";
 
-// Load cart from localStorage
-const getInitialCart = () => {
-  try {
-    const cart = localStorage.getItem("cart");
-    return cart ? JSON.parse(cart) : [];
-  } catch (error) {
-    console.error("Failed to load cart from localStorage", error);
-    return [];
-  }
-};
-
-// Utility: compare selectedOptions arrays
-const areOptionsEqual = (a = [], b = []) => {
-  if (a.length !== b.length) return false;
-  return a.every((opt, i) => opt.name === b[i]?.name && opt.value === b[i]?.value);
-};
-
+// ✅ FIXED: Empty initial state - load in useEffect
 export const itemSlice = createSlice({
   name: "item",
   initialState: {
-    list: getInitialCart(),
+    list: [], // ✅ Empty on server
   },
   reducers: {
     addData: (state, action) => {
       const item = action.payload;
-
-      // Check if exact same product with exact same options exists
       const existingItem = state.list.find(
         (i) => i._id === item._id && areOptionsEqual(i.selectedOptions, item.selectedOptions)
       );
@@ -37,7 +21,7 @@ export const itemSlice = createSlice({
         state.list.push({ ...item, quantity: 1 });
       }
 
-      localStorage.setItem("cart", JSON.stringify(state.list));
+      setToStorage("cart", state.list); // ✅ Safe storage
     },
 
     decreaseData: (state, action) => {
@@ -55,14 +39,14 @@ export const itemSlice = createSlice({
         );
       }
 
-      localStorage.setItem("cart", JSON.stringify(state.list));
+      setToStorage("cart", state.list);
     },
 
     deleteData: (state, action) => {
       state.list = state.list.filter(
         (i) => !(i._id === action.payload._id && areOptionsEqual(i.selectedOptions, action.payload.selectedOptions))
       );
-      localStorage.setItem("cart", JSON.stringify(state.list));
+      setToStorage("cart", state.list);
     },
 
     bulkUpdateData: (state, action) => {
@@ -82,15 +66,26 @@ export const itemSlice = createSlice({
         state.list.push({ ...action.payload, quantity });
       }
 
-      localStorage.setItem("cart", JSON.stringify(state.list));
+      setToStorage("cart", state.list);
     },
 
     deleteCart: (state) => {
       state.list = [];
-      localStorage.removeItem("cart");
+      setToStorage("cart", []); // ✅ Safe clear
+    },
+
+    // ✅ NEW: Load cart from storage
+    loadCart: (state) => {
+      const cart = getFromStorage("cart", []);
+      state.list = cart;
     },
   },
 });
 
-export const { addData, decreaseData, deleteData, bulkUpdateData, deleteCart } = itemSlice.actions;
+const areOptionsEqual = (a = [], b = []) => {
+  if (a.length !== b.length) return false;
+  return a.every((opt, i) => opt.name === b[i]?.name && opt.value === b[i]?.value);
+};
+
+export const { addData, decreaseData, deleteData, bulkUpdateData, deleteCart, loadCart } = itemSlice.actions;
 export default itemSlice.reducer;
