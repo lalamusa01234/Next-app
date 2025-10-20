@@ -138,7 +138,7 @@ return (
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.9, y: 20 }}
           transition={{ duration: 0.25 }}
-          className="w-90 bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden flex flex-col"
+          className="sm:w-90 w-65 bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden flex flex-col"
         >
           {/* Header */}
           <div className="bg-gray-900 text-white p-4 flex justify-between items-center border-b">
@@ -178,7 +178,7 @@ return (
           </div>
 
           {/* Messages */}
-          <div className="flex-1 p-4 overflow-y-auto max-h-96 min-h-80 space-y-3 bg-gray-50">
+          <div className="flex-1 p-4 overflow-y-auto sm:max-h-96 sm:min-h-80 min-h-60  space-y-3 bg-gray-50">
             {messages.length === 0 && (
               <p className="text-gray-400 text-sm text-center mt-10">
                 Start a conversation with our support team 💬
@@ -207,7 +207,7 @@ return (
           {/* Input */}
           <form
             onSubmit={handleSend}
-            className="border-t border-gray-200 flex items-center p-3 bg-white"
+            className="border-t border-gray-200 flex gap-2 items-center p-3 bg-white"
           >
             <input
               value={input}
@@ -217,7 +217,7 @@ return (
             />
             <button
               type="submit"
-              className="ml-2 bg-black text-white px-3 py-2 text-ce  rounded-lg text-sm hover:bg-gray-800"
+              className=" bg-black text-white px-3 py-2   rounded-lg text-sm hover:bg-gray-800"
             >
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-send w-5 h-5" aria-hidden="true"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"></path><path d="m21.854 2.147-10.94 10.939"></path></svg>
             </button>
