@@ -113,7 +113,7 @@ export default function ChatWidget() {
   }, [isOpen, greetingShown]); // ✅ stable dependency list
 
 return (
-  <div className="fixed bottom-6 right-6 z-50">
+  <div className="fixed sm:bottom-6 bottom-15  right-6 z-50">
     <AnimatePresence mode="wait">
       {/* 💬 Floating Chat Button — only visible when chat is closed */}
       {!isOpen && (
