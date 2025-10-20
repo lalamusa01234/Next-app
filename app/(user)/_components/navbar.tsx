@@ -400,7 +400,7 @@ const NavBar = () => {
           <ul className="flex flex-col h-dvh bg-white w-dvw md:hidden fixed inset-0 z-99999">
             <svg
               onClick={() => setMenuOpen(!menuOpen)}
-              className="mt-5 relative left-[94%] w-5 h-5 cursor-pointer transition-all duration-1000 ease-in-out md:hidden z-2500"
+              className="mt-5 relative left-[90%] w-5 h-5 cursor-pointer transition-all duration-1000 ease-in-out md:hidden z-2500"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
