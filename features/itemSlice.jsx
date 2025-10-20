@@ -1,8 +1,10 @@
+"use client";
 import { createSlice } from "@reduxjs/toolkit";
 
 // Load cart from localStorage
 const getInitialCart = () => {
   try {
+    
     const cart = localStorage.getItem("cart");
     return cart ? JSON.parse(cart) : [];
   } catch (error) {
